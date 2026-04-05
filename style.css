@@ -1,0 +1,259 @@
+:root {
+  --bg-navy: #1f2128;
+  --bg-panel: #dadddf;
+  
+  --gap: 16px;
+  --padding: 24px;
+  
+  --radius-panel: 24px;
+  --radius-pill: 9999px;
+  --radius-small: 16px;
+}
+
+body {
+  margin: 0;
+  padding: var(--padding);
+  background-color: var(--bg-navy);
+  
+  /* Fit To Screen constraints */
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  overflow: hidden; 
+  
+  display: flex;
+}
+
+/* ================================= */
+/* NAVBAR: Detached Glassmorphism    */
+/* ================================= */
+.navbar {
+  position: absolute;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  
+  display: flex;
+  gap: 32px;
+  padding: 16px 36px;
+  border-radius: 9999px;
+  
+  background: rgba(255, 255, 255, 0.05); 
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.4s ease-out;
+}
+
+.navbar.initial-visible,
+.navbar:hover {
+  opacity: 1;
+}
+
+.nav-item {
+  color: #fff;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.nav-item:hover {
+  color: #dadddf;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+/* ================================= */
+/* CORE BENTO SYSTEM                 */
+/* ================================= */
+.bento-container {
+  display: flex;
+  flex-direction: row;
+  
+  /* Allows absolute 100% full screen fluid stretching */
+  width: 100%;
+  height: 100%;
+  gap: var(--gap);
+  box-sizing: border-box;
+}
+
+.panel {
+  background-color: var(--bg-panel);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-panel);
+}
+
+/* MAIN COLUMNS */
+.col-left {
+  display: flex;
+  flex-direction: column;
+  flex: 476; 
+  gap: var(--gap);
+}
+
+.col-right {
+  display: flex;
+  flex-direction: column;
+  flex: 505; 
+  gap: var(--gap);
+}
+
+/* LEFT COLUMN STRUCTURE */
+.top-left {
+  display: flex;
+  flex-direction: row;
+  flex: 366; 
+  width: 100%;
+  gap: var(--gap);
+}
+
+.bottom-left {
+  display: flex;
+  flex-direction: row;
+  flex: 313; 
+  width: 100%;
+  gap: var(--gap);
+}
+
+/* SUB-COLUMNS */
+.sub-col-a {
+  display: flex;
+  flex-direction: column;
+  flex: 228.5; 
+  gap: var(--gap);
+}
+
+.sub-col-b {
+  display: flex;
+  flex-direction: column;
+  flex: 231.5; 
+  gap: var(--gap);
+}
+
+/* INDIVIDUAL PANELS */
+.p1 { flex: 65; border-radius: var(--radius-pill); }
+.p2 { flex: 395; }
+.p3 { flex: 80; border-radius: var(--radius-pill); }
+.p5 { flex: 217; }
+.p4 { flex: 217; }
+.p6 { flex: 80; border-radius: var(--radius-pill); }
+
+
+/* ================================= */
+/* PANEL 7 INTERNAL ISOLATION        */
+/* ================================= */
+.p7 { 
+  flex: 430; 
+  background-color: #ffffff !important;
+  display: flex;
+  flex-direction: column;
+  
+  /* Exact math padding deduction (505 total width - 483 inner width) / 2 = 11px */
+  padding: 11px; 
+  /* Exact math gap deduction (430 total height - 396 inner height - 22 padding) = 12px vertical gap */
+  gap: 12px; 
+  box-sizing: border-box;
+}
+
+.p7-row-top {
+  display: flex;
+  flex-direction: row;
+  flex: 200;  /* Exact requested height */
+  width: 100%;
+  /* Exact math gap deduction (483 width - 442 sum of widths) / 3 = 13.6px horizontal gap */
+  gap: 13.6px; 
+}
+
+.p7-row-bot {
+  flex: 196; /* Exact requested height */
+  width: 100%;
+  background-color: var(--bg-panel);
+  border-radius: var(--radius-panel); 
+}
+
+.p7-block-l {
+  flex: 160; /* Exact requested width */
+  background-color: var(--bg-panel);
+  border-radius: var(--radius-panel);
+}
+
+.p7-block-m {
+  flex: 112; /* Exact requested width */
+  background-color: var(--bg-panel);
+  border-radius: var(--radius-panel);
+}
+
+.p7-stack {
+  flex: 58; /* Exact requested width */
+  display: flex;
+  flex-direction: column;
+  /* Exact math gap deduction (200 height - 174 sum of heights) / 2 = 13px stack gap */
+  gap: 13px; 
+  
+  /* Centers them instead of explicitly stretching them wide under full screen flex */
+  align-items: center; 
+}
+
+.p7-stack > div {
+  flex: 1; /* Exactly divides the column height into 3 parts */
+  height: auto; 
+  width: auto; 
+  
+  /* This ensures the circles never turn into flat ovals AND prevents them from becoming massive */
+  aspect-ratio: 1 / 1; 
+}
+
+.p7-stack .shape-circle {
+  background-color: var(--bg-panel);
+  border-radius: 50%;
+}
+
+.p7-stack .shape-sq {
+  background-color: var(--bg-panel);
+  border-radius: var(--radius-small); /* Requested 16px */
+}
+
+.p9 { flex: 244; }
+
+
+/* ================================= */
+/* MOBILE OVERRIDES                  */
+/* ================================= */
+@media (max-width: 768px) {
+  body {
+    padding: 16px; 
+    overflow-y: auto; 
+  }
+
+  .bento-container {
+    flex-direction: column; 
+    width: 100%;
+    height: auto;
+  }
+
+  .col-left, .col-right {
+    width: 100%;
+  }
+  
+  .col-left { flex: 679; }
+  .col-right { flex: 674; }
+
+  .navbar {
+    top: auto;
+    bottom: 24px;
+    opacity: 1 !important; 
+    gap: 16px;
+    justify-content: space-evenly;
+    width: calc(100% - 64px); 
+    padding: 16px 20px;
+    position: fixed;
+  }
+}
