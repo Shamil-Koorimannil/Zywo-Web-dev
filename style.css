@@ -1,27 +1,40 @@
 :root {
-  --bg-navy: #1f2128;
+  --bg-navy: linear-gradient(to right, #2C367A, #A6B4EE);
   --bg-panel: #dadddf;
-  
+
   --gap: 16px;
   --padding: 24px;
-  
+
   --radius-panel: 24px;
   --radius-pill: 9999px;
   --radius-small: 16px;
+
+  --ui-scale: 1.1;
+
+  --text-color: #2C367A;
+  --font-primary: 'Roboto', sans-serif;
+  --font-heading: 'Changa', sans-serif;
 }
 
 body {
   margin: 0;
   padding: var(--padding);
-  background-color: var(--bg-navy);
-  
+  background: var(--bg-navy);
+  color: var(--text-color);
+  font-family: var(--font-primary);
+
   /* Fit To Screen constraints */
   height: 100vh;
   width: 100vw;
   box-sizing: border-box;
-  overflow: hidden; 
-  
+  overflow: hidden;
+
   display: flex;
+}
+
+h1,
+h2 {
+  font-family: var(--font-heading);
 }
 
 /* ================================= */
@@ -33,18 +46,23 @@ body {
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
-  
+
   display: flex;
   gap: 32px;
-  padding: 16px 36px;
-  border-radius: 9999px;
-  
-  background: rgba(255, 255, 255, 0.05); 
+  /* padding: 16px 36px; removed to respect fixed dimensions properly */
+  border-radius: calc(25px * var(--ui-scale));
+  width: calc(726px * var(--ui-scale));
+  height: calc(60px * var(--ui-scale));
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
-  
+
   opacity: 0;
   transition: opacity 0.5s ease-in-out, transform 0.4s ease-out;
 }
@@ -55,9 +73,9 @@ body {
 }
 
 .nav-item {
-  color: #fff;
+  color: var(--text-color);
   text-decoration: none;
-  font-family: sans-serif;
+  font-family: var(--font-primary);
   font-size: 14px;
   font-weight: 500;
   text-transform: capitalize;
@@ -66,7 +84,7 @@ body {
 }
 
 .nav-item:hover {
-  color: #dadddf;
+  color: #1a204a;
   text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
 }
 
@@ -76,7 +94,7 @@ body {
 .bento-container {
   display: flex;
   flex-direction: row;
-  
+
   /* Allows absolute 100% full screen fluid stretching */
   width: 100%;
   height: 100%;
@@ -89,9 +107,12 @@ body {
   Forces all structural flex containers to obey their flex ratios strictly 
   without dynamically bulging if their child textual or pixel contents overflow.
 */
-.col-left, .col-right,
-.top-left, .bottom-left,
-.sub-col-a, .sub-col-b,
+.col-left,
+.col-right,
+.top-left,
+.bottom-left,
+.sub-col-a,
+.sub-col-b,
 .panel {
   min-width: 0;
   min-height: 0;
@@ -108,14 +129,14 @@ body {
 .col-left {
   display: flex;
   flex-direction: column;
-  flex: 476; 
+  flex: 476;
   gap: var(--gap);
 }
 
 .col-right {
   display: flex;
   flex-direction: column;
-  flex: 505; 
+  flex: 505;
   gap: var(--gap);
 }
 
@@ -123,7 +144,7 @@ body {
 .top-left {
   display: flex;
   flex-direction: row;
-  flex: 366; 
+  flex: 366;
   width: 100%;
   gap: var(--gap);
 }
@@ -131,7 +152,7 @@ body {
 .bottom-left {
   display: flex;
   flex-direction: row;
-  flex: 313; 
+  flex: 313;
   width: 100%;
   gap: var(--gap);
 }
@@ -140,21 +161,21 @@ body {
 .sub-col-a {
   display: flex;
   flex-direction: column;
-  flex: 228.5; 
+  flex: 228.5;
   gap: var(--gap);
 }
 
 .sub-col-b {
   display: flex;
   flex-direction: column;
-  flex: 231.5; 
+  flex: 231.5;
   gap: var(--gap);
 }
 
 /* INDIVIDUAL PANELS */
-.p1 { 
-  flex: 65; 
-  border-radius: var(--radius-pill); 
+.p1 {
+  flex: 65;
+  border-radius: var(--radius-pill);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -165,12 +186,13 @@ body {
 .p1-img {
   width: 60%;
   aspect-ratio: 1/1;
-  background-color: rgba(255, 255, 255, 0.4); /* transparent white placeholder */
+  background-color: rgba(255, 255, 255, 0.4);
+  /* transparent white placeholder */
   border-radius: 50%;
 }
 
-.p2 { 
-  flex: 395; 
+.p2 {
+  flex: 395;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -193,12 +215,12 @@ body {
 }
 
 .p2-btn {
-  background-color: #fff;
+  background-color: #A6B4EE;
   border-radius: 9999px;
   padding: 8px 16px;
   text-decoration: none;
-  color: var(--bg-navy);
-  font-family: sans-serif;
+  color: #fff;
+  font-family: var(--font-primary);
   font-size: 14px;
   font-weight: 600;
   transition: opacity 0.2s ease;
@@ -229,9 +251,9 @@ body {
   opacity: 0.8;
 }
 
-.p3 { 
-  flex: 80; 
-  border-radius: var(--radius-pill); 
+.p3 {
+  flex: 80;
+  border-radius: var(--radius-pill);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -248,16 +270,16 @@ body {
 }
 
 .p3-text {
-  font-family: sans-serif;
+  font-family: var(--font-primary);
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 1px;
-  color: #fff;
+  color: var(--text-color);
   opacity: 0.9;
 }
 
-.p5 { 
-  flex: 217; 
+.p5 {
+  flex: 217;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -329,8 +351,8 @@ body {
   margin-top: 4px;
 }
 
-.p4 { 
-  flex: 217; 
+.p4 {
+  flex: 217;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -389,24 +411,26 @@ body {
   margin-top: 4px;
 }
 
-.p6 { 
-  flex: 80; 
-  border-radius: var(--radius-pill); 
+.p6 {
+  flex: 80;
+  border-radius: var(--radius-pill);
   display: flex;
   justify-content: center;
   align-items: center;
   transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: #2F323D; /* Base fallback color */
+  background-color: #2F323D;
+  /* Base fallback color */
 }
 
 .client-logo {
-  font-family: sans-serif;
+  font-family: var(--font-primary);
   font-weight: 800;
   font-size: 22px;
   letter-spacing: 2px;
-  color: #fff;
+  color: var(--text-color);
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-  transform: translateX(0); /* Natively centered */
+  transform: translateX(0);
+  /* Natively centered */
 }
 
 /* Flows out to the left while vanishing */
@@ -426,65 +450,71 @@ body {
 /* ================================= */
 /* PANEL 7 INTERNAL ISOLATION        */
 /* ================================= */
-.p7 { 
-  flex: 430; 
+.p7 {
+  flex: 430;
   background-color: #ffffff !important;
   display: flex;
   flex-direction: column;
-  
+
   /* Exact math padding deduction (505 total width - 483 inner width) / 2 = 11px */
-  padding: 11px; 
+  padding: 11px;
   /* Exact math gap deduction (430 total height - 396 inner height - 22 padding) = 12px vertical gap */
-  gap: 12px; 
+  gap: 12px;
   box-sizing: border-box;
 }
 
 .p7-row-top {
   display: flex;
   flex-direction: row;
-  flex: 200;  /* Exact requested height */
+  flex: 200;
+  /* Exact requested height */
   width: 100%;
   /* Exact math gap deduction (483 width - 442 sum of widths) / 3 = 13.6px horizontal gap */
-  gap: 13.6px; 
+  gap: 13.6px;
 }
 
 .p7-row-bot {
-  flex: 196; /* Exact requested height */
+  flex: 196;
+  /* Exact requested height */
   width: 100%;
   background-color: var(--bg-panel);
-  border-radius: var(--radius-panel); 
+  border-radius: var(--radius-panel);
 }
 
 .p7-block-l {
-  flex: 160; /* Exact requested width */
+  flex: 160;
+  /* Exact requested width */
   background-color: var(--bg-panel);
   border-radius: var(--radius-panel);
 }
 
 .p7-block-m {
-  flex: 112; /* Exact requested width */
+  flex: 112;
+  /* Exact requested width */
   background-color: var(--bg-panel);
   border-radius: var(--radius-panel);
 }
 
 .p7-stack {
-  flex: 58; /* Exact requested width */
+  flex: 58;
+  /* Exact requested width */
   display: flex;
   flex-direction: column;
   /* Exact math gap deduction (200 height - 174 sum of heights) / 2 = 13px stack gap */
-  gap: 13px; 
-  
+  gap: 13px;
+
   /* Centers them instead of explicitly stretching them wide under full screen flex */
-  align-items: center; 
+  align-items: center;
 }
 
-.p7-stack > div {
-  flex: 1; /* Exactly divides the column height into 3 parts */
-  height: auto; 
-  width: auto; 
-  
+.p7-stack>div {
+  flex: 1;
+  /* Exactly divides the column height into 3 parts */
+  height: auto;
+  width: auto;
+
   /* This ensures the circles never turn into flat ovals AND prevents them from becoming massive */
-  aspect-ratio: 1 / 1; 
+  aspect-ratio: 1 / 1;
 }
 
 .p7-stack .shape-circle {
@@ -494,11 +524,12 @@ body {
 
 .p7-stack .shape-sq {
   background-color: var(--bg-panel);
-  border-radius: var(--radius-small); /* Requested 16px */
+  border-radius: var(--radius-small);
+  /* Requested 16px */
 }
 
-.p9 { 
-  flex: 244; 
+.p9 {
+  flex: 244;
   display: flex;
   flex-direction: row;
   padding: 24px;
@@ -529,7 +560,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end; 
+  align-items: flex-end;
 }
 
 .p9-camp-copy {
@@ -549,8 +580,20 @@ body {
   transition: transform 1.0s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.9s ease-out;
 }
 
-.p9-desc-1 { width: 70%; height: 16px; background-color: #fff; border-radius: 8px; }
-.p9-desc-2 { width: 50%; height: 12px; background-color: #fff; border-radius: 6px; opacity: 0.8; }
+.p9-desc-1 {
+  width: 70%;
+  height: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.p9-desc-2 {
+  width: 50%;
+  height: 12px;
+  background-color: #fff;
+  border-radius: 6px;
+  opacity: 0.8;
+}
 
 .p9-camp-dots {
   display: flex;
@@ -561,18 +604,55 @@ body {
   width: 100%;
 }
 
-.p9-dot-tiny { width: 16px; height: 8px; background-color: #fff; border-radius: 4px; opacity: 0.4; }
-.p9-dot-active { width: 24px; height: 24px; background-color: #fff; border-radius: 50%; }
+.p9-dot-tiny {
+  width: 16px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 4px;
+  opacity: 0.4;
+}
+
+.p9-dot-active {
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
+  border-radius: 50%;
+}
 
 /* Parallax Staggered Outflow Logic */
-.slide-left-fast { transform: translateX(-40px); opacity: 0; }
-.slide-left-med { transform: translateX(-60px); opacity: 0; }
-.slide-left-slow { transform: translateX(-80px); opacity: 0; }
+.slide-left-fast {
+  transform: translateX(-40px);
+  opacity: 0;
+}
+
+.slide-left-med {
+  transform: translateX(-60px);
+  opacity: 0;
+}
+
+.slide-left-slow {
+  transform: translateX(-80px);
+  opacity: 0;
+}
 
 /* Parallax Staggered Inflow Snaps */
-.prepare-right-fast { transition: none !important; opacity: 0; transform: translateX(40px); }
-.prepare-right-med { transition: none !important; opacity: 0; transform: translateX(60px); }
-.prepare-right-slow { transition: none !important; opacity: 0; transform: translateX(80px); }
+.prepare-right-fast {
+  transition: none !important;
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.prepare-right-med {
+  transition: none !important;
+  opacity: 0;
+  transform: translateX(60px);
+}
+
+.prepare-right-slow {
+  transition: none !important;
+  opacity: 0;
+  transform: translateX(80px);
+}
 
 
 /* ================================= */
@@ -580,31 +660,47 @@ body {
 /* ================================= */
 @media (max-width: 768px) {
   body {
-    padding: 16px; 
-    overflow-y: auto; 
+    padding: 16px;
+    overflow-y: auto;
   }
 
   .bento-container {
-    flex-direction: column; 
+    flex-direction: column;
     width: 100%;
     height: auto;
   }
 
-  .col-left, .col-right {
+  .col-left,
+  .col-right {
     width: 100%;
   }
-  
-  .col-left { flex: 679; }
-  .col-right { flex: 674; }
+
+  .col-left {
+    flex: none;
+    height: calc(100vh - 32px);
+  }
+
+  .col-right {
+    flex: none;
+    height: calc(100vh - 32px);
+  }
 
   .navbar {
     top: auto;
     bottom: 24px;
-    opacity: 1 !important; 
+    opacity: 1 !important;
     gap: 16px;
     justify-content: space-evenly;
-    width: calc(100% - 64px); 
-    padding: 16px 20px;
+    width: calc(100% - 64px);
+    padding: 0;
     position: fixed;
+  }
+
+  .p1 {
+    flex: 120;
+  }
+
+  .p2 {
+    flex: 340;
   }
 }
