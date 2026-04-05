@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bento UI Proportions</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zywo - Advanced Bento Architecture</title>
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Encapsulated Web Components Imports -->
+  <script type="module" src="./components/Navbar.js"></script>
+  <script type="module" src="./components/Panel1.js"></script>
+  <script type="module" src="./components/Panel2.js"></script>
+  <script type="module" src="./components/Panel3.js"></script>
+  <script type="module" src="./components/Panel4.js"></script>
+  <script type="module" src="./components/Panel5.js"></script>
+  <script type="module" src="./components/Panel6.js"></script>
+  <script type="module" src="./components/Panel7.js"></script>
+  <script type="module" src="./components/Panel9.js"></script>
 </head>
 <body>
-  
-  <nav class="navbar initial-visible">
-    <a href="#" class="nav-item">Home</a>
-    <a href="#" class="nav-item">Work</a>
-    <a href="#" class="nav-item">Service</a>
-    <a href="#" class="nav-item">Careers</a>
-  </nav>
+
+  <!-- Modular Nav injected cleanly into the top level -->
+  <bento-navbar></bento-navbar>
 
   <div class="bento-container">
     
@@ -22,65 +29,21 @@
       
       <!-- Top Left Row (Ratio Height: 366) -->
       <div class="top-left">
-        <div class="panel p1">
-          <div class="p1-img"></div>
-          <div class="p1-img"></div>
-          <div class="p1-img"></div>
-          <div class="p1-img"></div>
-          <div class="p1-img"></div>
-        </div>
-        <div class="panel p2">
-          <div class="p2-top">
-            <div class="p2-logo"></div>
-            <a href="#" class="p2-btn">Blogs</a>
-          </div>
-          <div class="p2-bottom">
-            <div class="p2-tagline-1"></div>
-            <div class="p2-tagline-2"></div>
-          </div>
-        </div>
+        <bento-panel-1></bento-panel-1>
+        <bento-panel-2></bento-panel-2>
       </div>
       
       <!-- Bottom Left Section (Ratio Height: ~313. 80 + gap + 217) -->
       <div class="bottom-left">
         <!-- Sub Col A (Ratio Width: 228) -->
         <div class="sub-col-a">
-          <div class="panel p3">
-            <div class="p3-img"></div>
-            <div class="p3-text">Team</div>
-            <div class="p3-img"></div>
-          </div>
-          <div class="panel p5">
-            <div class="p5-top">
-              <div class="p5-title-group">
-                <div class="p5-logo"></div>
-                <div class="p5-name"></div>
-              </div>
-              <div class="p5-dot"></div>
-            </div>
-            <div class="p5-desc">
-              <div class="p5-line-1"></div>
-              <div class="p5-line-2"></div>
-              <div class="p5-line-3"></div>
-            </div>
-          </div>
+          <bento-panel-3></bento-panel-3>
+          <bento-panel-5></bento-panel-5>
         </div>
         <!-- Sub Col B (Ratio Width: 231) -->
         <div class="sub-col-b">
-          <div class="panel p4">
-            <div class="p4-top">
-              <div class="p4-profile"></div>
-              <div class="p4-quote"></div>
-            </div>
-            <div class="p4-bottom">
-              <div class="p4-name"></div>
-              <div class="p4-role"></div>
-              <div class="p4-test"></div>
-            </div>
-          </div>
-          <div class="panel p6">
-            <div class="client-logo">Brand 1</div>
-          </div>
+          <bento-panel-4></bento-panel-4>
+          <bento-panel-6></bento-panel-6>
         </div>
       </div>
       
@@ -88,40 +51,11 @@
 
     <!-- Right Column Main (Ratio Width: 505) -->
     <div class="col-right">
-      <div class="panel p7">
-        <div class="p7-row-top">
-          <div class="p7-block-l"></div>
-          <div class="p7-block-m"></div>
-          <div class="p7-block-m"></div>
-          <div class="p7-stack">
-             <div class="shape-circle"></div>
-             <div class="shape-sq"></div>
-             <div class="shape-sq"></div>
-          </div>
-        </div>
-        <div class="p7-row-bot"></div>
-      </div>
-      <div class="panel p9">
-        <div class="p9-left">
-          <div class="p9-camp-img"></div>
-        </div>
-        <div class="p9-right">
-          <div class="p9-camp-copy"></div>
-          <div class="p9-camp-desc">
-            <div class="p9-desc-1"></div>
-            <div class="p9-desc-2"></div>
-          </div>
-          <div class="p9-camp-dots">
-            <div class="p9-dot-tiny"></div>
-            <div class="p9-dot-active"></div>
-            <div class="p9-dot-tiny"></div>
-          </div>
-        </div>
-      </div>
+      <bento-panel-7></bento-panel-7>
+      <bento-panel-9></bento-panel-9>
     </div>
 
   </div>
 
-  <script src="script.js"></script>
 </body>
 </html>
