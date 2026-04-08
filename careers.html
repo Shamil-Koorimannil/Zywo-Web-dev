@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers - Zywo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Changa:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Web Components & Application Scripts -->
+  <script type="module" src="./components/Navbar.js"></script>
+  <script type="module" src="./components/ConnectButton.js"></script>
+  <script src="./careers.js"></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body class="careers-page">
+
+  <!-- Modular Navbar Wrapper -->
+  <bento-navbar></bento-navbar>
+
+  <main class="careers-container">
+    <div class="careers-header">
+      <h1 class="page-title">Join Our Team</h1>
+      <p class="step-desc">We are always looking for visionary talent to build the future of digital experience. Shape
+        your career alongside industry leaders.</p>
+    </div>
+
+    <!-- Liquid Glass Form Outer Shell -->
+    <div class="glass-form-container">
+      <form id="careers-form" onsubmit="submitCareersForm(event)">
+        <div class="input-group">
+          <label for="Name">Full Name</label>
+          <input type="text" id="Name" name="Name" required placeholder="Name">
+        </div>
+
+        <div class="input-group">
+          <label for="Phone">Phone Number</label>
+          <input type="tel" id="Phone" name="Phone" required placeholder="+xxxxxxxxxxx">
+        </div>
+
+        <div class="input-group">
+          <label for="Email">Email Address</label>
+          <input type="email" id="Email" name="Email" required placeholder="example@gmail.com">
+        </div>
+
+        <div class="input-group">
+          <label for="Role">Role Applying For</label>
+          <select id="Role" name="Role" required>
+            <option value="" disabled selected>Select a position...</option>
+            <option value="Graphic Designer">Graphic Designer</option>
+            <option value="UI/UX Designer">UI/UX Designer</option>
+            <option value="Frontend Developer">Frontend Developer</option>
+            <option value="Video Editor">Video Editor</option>
+            <option value="Brand Strategist">Brand Strategist</option>
+            <option value="Social Media Manager">Social Media Manager</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="Portfolio_Link">Portfolio Link</label>
+          <input type="url" id="Portfolio_Link" name="Portfolio_Link" required placeholder="Portfolio Link">
+        </div>
+
+        <div class="input-group">
+          <label for="Message">Cover Letter / Message</label>
+          <textarea id="Message" name="Message" rows="4" required placeholder="Message"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitFormBtn">Submit Application</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Connect Us Modular Float -->
+  <connect-button></connect-button>
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery - Zywo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Changa:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <!-- Encapsulated Web Components Imports -->
+  <script type="module" src="./components/Navbar.js"></script>
+  <script type="module" src="./components/Panel7.js"></script>
+  <script type="module" src="./components/ConnectButton.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body class="gallery-page">
+
+  <!-- Modular Nav injected cleanly into the top level (absolute positioning overlaps content securely) -->
+  <bento-navbar></bento-navbar>
+
+  <div class="gallery-grid">
+    <bento-panel-7></bento-panel-7>
+    <bento-panel-7></bento-panel-7>
+    <bento-panel-7></bento-panel-7>
+    <bento-panel-7></bento-panel-7>
+  </div>
+
+  <!-- Modular Connect Us Button -->
+  <connect-button></connect-button>
+
+</body>
+</html>

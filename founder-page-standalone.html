@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Founder Profile - Standalone</title>
+    <!-- Include necessary fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Changa:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Encapsulated Web Components Imports -->
+    <script type="module" src="./components/Navbar.js"></script>
+    <script type="module" src="./components/ConnectButton.js"></script>
+
+    <style>
+        html, body {
+            background: #ffffff;
+        }
+
+        :root {
+            --surface: #ffffff;
+            --card: linear-gradient(135deg, #2A3276, #7E8DC5);
+            --font-heading: 'Changa', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            --color-highlight: #A6B4EE;
+            --radius-xl: 36px;
+            --radius-lg: 28px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-body);
+            position: relative;
+            z-index: 0;
+        }
+
+        .founder-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 80vh;
+            min-height: 600px;
+            display: grid;
+            grid-template-columns: 1fr 0.55fr;
+            gap: 24px;
+            padding: 24px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+            color: #ffffff;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card.card-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 24px;
+            /* Space for scrollbar */
+        }
+
+        .card-right-group {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .card-img-container {
+            flex: 1.5;
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .card-details {
+            flex: 1;
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            color: #ffffff;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .slide-heading {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin: 0 0 24px 0;
+            text-transform: uppercase;
+            font-family: var(--font-heading);
+        }
+
+        .slide-heading .highlight {
+            color: var(--color-highlight);
+        }
+
+        .founder-scroll-container {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding-right: 16px;
+            box-sizing: border-box;
+        }
+
+        .founder-scroll-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .founder-scroll-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .founder-scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .founder-scroll-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .founder-description {
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.7;
+            opacity: 0.9;
+            margin: 0 0 16px 0;
+        }
+
+        .founder-role {
+            margin: 0 0 12px 0;
+            opacity: 0.7;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .founder-quote {
+            font-size: 14px;
+            font-style: italic;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        .founder-quote p {
+            margin: 0;
+        }
+
+        .founder-name {
+            font-size: 13px;
+            text-align: right;
+            width: 100%;
+            margin: 12px 0 0 0;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+
+
+        /* Responsive Layout */
+        @media (max-width: 900px) {
+            .founder-container {
+                grid-template-columns: 1fr;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .card.card-left {
+                height: 50vh;
+                min-height: 350px;
+                padding-right: 16px;
+            }
+
+            .card-right-group {
+                display: flex;
+                flex-direction: row;
+                height: 35vh;
+                min-height: 250px;
+                gap: 12px;
+            }
+
+            .card-img-container {
+                flex: 1.5;
+                min-height: auto;
+            }
+
+            .card-details {
+                flex: 1;
+                padding: 16px;
+            }
+
+            .slide-heading {
+                font-size: 32px;
+                margin-bottom: 12px;
+            }
+
+            .founder-description,
+            .founder-quote {
+                font-size: 13px;
+                line-height: 1.5;
+                margin-bottom: 12px;
+            }
+
+            .founder-role {
+                margin-bottom: 8px;
+                font-size: 11px;
+            }
+        }
+    </style>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- Modular Nav injected cleanly into the top level -->
+    <bento-navbar></bento-navbar>
+
+    <div class="founder-container">
+        <!-- Left Section (Text) -->
+        <div class="card card-left">
+            <div class="founder-scroll-container">
+                <h2 class="slide-heading"><span class="highlight">Know The Founder
+                    </span></h2>
+                <p class="founder-description">
+                    At just 21, Rayan Hany is a passionate Creative Director and Brand Strategist from Kerala, India. He
+                    loves turning ideas into visuals that people can connect with. With a degree in Computer
+                    Applications and a diploma in Advertising and Photography from the Evoka School of Advertising, he
+                    brings a special mix of tech skills and creative energy. This makes him one of the best new leaders
+                    in helping brands tell their story through great design.
+                </p>
+                <p class="founder-description">
+                    The idea for Zywo came from a simple observation. In 2024, at a business conference, Rayan met many
+                    startup founders from across India. They were brilliant and passionate, but their branding didn't
+                    show it. Their amazing ideas were hidden behind boring logos and advertisements that didn't work. As
+                    a graphic designer, Rayan knew he could help. He believed that great ideas deserve to look great,
+                    too.
+                </p>
+                <p class="founder-description">
+                    Inspired, Rayan launched Zywo to help these amazing businesses look as good on the outside as they
+                    were on the inside. He wanted to build an agency that would be a true partner to its clients, not
+                    just a service for hire. At Zywo, every project is handled with care, blending smart thinking with
+                    creative design. For Rayan, it's simple: every little detail matters.
+                </p>
+                <p class="founder-description">
+                    Today, as Zywo's Creative Director and head Brand Strategist, Rayan leads a talented team to help
+                    brands tell their stories better. He is a hands-on leader and visualizer, always involved in
+                    creating effective online advertisements and marketing solutions. His main goal is to help good
+                    businesses get noticed, grow, and build a lasting name for themselves in today's busy world.
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Section (Image & Details) -->
+        <div class="card-right-group">
+            <div class="card-img-container">
+                <img src="./assets/images/Rayan hany a.jpg" alt="Rayan Hany Image">
+            </div>
+            <div class="card-details">
+                <!-- <p class="founder-role">Founder</p> -->
+                <div class="founder-quote">
+                    <p>The world's losing attention span day by day. To make your brand memorable, you need something
+                        different. Because <br><br> "Every_Impression_Matters"</p>
+                </div>
+                <p class="founder-name">- Rayan Hany</p>
+                <!-- <img src="./assets/images/People/Rayan sign.png" alt="Rayan Hany Signature"
+                    style="max-height: 45px; margin-top: 10px; display: block; align-self: flex-end;"> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modular Connect Us Button -->
+    <connect-button></connect-button>
+
+</body>
+
+</html>

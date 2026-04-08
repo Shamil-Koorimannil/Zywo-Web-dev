@@ -1,6 +1,23 @@
 class BentoPanel9 extends HTMLElement {
   connectedCallback() {
     this.className = "panel p9";
+    this.style.cursor = "pointer";
+    this.addEventListener('click', () => {
+      // Determine if we are already inside the campaigns grid page
+      if (window.location.pathname.includes('campaigns.html')) {
+        if (window.triggerPageTransition) {
+          window.triggerPageTransition('campaign-detail.html');
+        } else {
+          window.location.href = 'campaign-detail.html';
+        }
+      } else {
+        if (window.triggerPageTransition) {
+          window.triggerPageTransition('campaigns.html');
+        } else {
+          window.location.href = 'campaigns.html';
+        }
+      }
+    });
     this.innerHTML = `
       <div class="p9-left">
         <div class="p9-camp-img"></div>

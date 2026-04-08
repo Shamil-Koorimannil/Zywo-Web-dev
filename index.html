@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zywo - Advanced Bento Architecture</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zywo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Changa:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  
   <!-- Encapsulated Web Components Imports -->
   <script type="module" src="./components/Navbar.js"></script>
   <script type="module" src="./components/Panel1.js"></script>
@@ -17,23 +22,25 @@
   <script type="module" src="./components/Panel7.js"></script>
   <script type="module" src="./components/Panel9.js"></script>
   <script type="module" src="./components/ConnectButton.js"></script>
+  <script src="script.js" defer></script>
 </head>
-<body>
+
+<body class="home-page">
 
   <!-- Modular Nav injected cleanly into the top level -->
   <bento-navbar></bento-navbar>
 
   <div class="bento-container">
-    
+
     <!-- Left Column Main (Ratio Width: 476) -->
     <div class="col-left">
-      
+
       <!-- Top Left Row (Ratio Height: 366) -->
       <div class="top-left">
         <bento-panel-1></bento-panel-1>
         <bento-panel-2></bento-panel-2>
       </div>
-      
+
       <!-- Bottom Left Section (Ratio Height: ~313. 80 + gap + 217) -->
       <div class="bottom-left">
         <!-- Sub Col A (Ratio Width: 228) -->
@@ -47,7 +54,7 @@
           <bento-panel-6></bento-panel-6>
         </div>
       </div>
-      
+
     </div>
 
     <!-- Right Column Main (Ratio Width: 505) -->
@@ -62,4 +69,5 @@
   <connect-button></connect-button>
 
 </body>
+
 </html>

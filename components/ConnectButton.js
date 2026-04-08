@@ -12,6 +12,7 @@ class ConnectButton extends HTMLElement {
                     right: calc(50% - 363px * var(--ui-scale, 1));
                     left: auto;
                     bottom: auto;
+                    opacity: 1; /* locked natively visible */
                     z-index: 1000;
                     display: flex;
                     flex-direction: column-reverse; /* popup below button */
@@ -29,14 +30,14 @@ class ConnectButton extends HTMLElement {
                     -webkit-backdrop-filter: blur(24px);
                     border: 1px solid rgba(255, 255, 255, 0.1);
                     box-sizing: border-box;
-                    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+                    /* shadow removed */
                     cursor: pointer;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s ease;
                     color: #2C367A;
-                    font-family: 'Changa', sans-serif;
+                    font-family: 'Roboto', sans-serif;
                     font-weight: 500;
                     font-size: calc(16px * var(--ui-scale, 1));
                     letter-spacing: 0.5px;
@@ -60,7 +61,7 @@ class ConnectButton extends HTMLElement {
 
                 .floating-action-btn:hover {
                     transform: translateY(-4px) scale(1.02);
-                    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+                    /* shadow removed */
                     background: rgba(255, 255, 255, 0.1);
                 }
 
@@ -160,7 +161,7 @@ class ConnectButton extends HTMLElement {
                     position: fixed;
                     top: 0;
                     left: 0;
-                    width: 100vw;
+                    width: 100%;
                     height: 100vh;
                     z-index: 2000;
                     display: flex;
@@ -231,7 +232,7 @@ class ConnectButton extends HTMLElement {
                 }
 
                 .modal-title {
-                    color: #2C367A;
+                    color: #ffffff;
                     font-size: 24px;
                     margin: 0 0 24px 0;
                     font-family: 'Changa', sans-serif;
@@ -252,7 +253,7 @@ class ConnectButton extends HTMLElement {
 
                 .input-group label {
                     font-size: 13px;
-                    color: #2C367A;
+                    color: #ffffff;
                     font-weight: 500;
                     letter-spacing: 0.5px;
                 }
@@ -264,7 +265,7 @@ class ConnectButton extends HTMLElement {
                     border: 1px solid rgba(255, 255, 255, 0.15);
                     border-radius: 12px;
                     padding: 14px 16px;
-                    color: #2C367A;
+                    color: #ffffff;
                     font-family: 'Roboto', sans-serif;
                     font-size: 15px;
                     box-sizing: border-box;
@@ -274,7 +275,7 @@ class ConnectButton extends HTMLElement {
 
                 .input-group input::placeholder,
                 .input-group textarea::placeholder {
-                    color: rgba(44, 54, 122, 0.5); /* derived from #2C367A */
+                    color: rgba(193, 193, 193, 0.5); /* derived from #2C367A */
                 }
 
                 .input-group input:focus,
@@ -313,6 +314,7 @@ class ConnectButton extends HTMLElement {
 
                 @media (max-width: 768px) {
                     .floating-action-container {
+                        opacity: 1 !important;
                         top: auto;
                         bottom: 96px; /* Near top right side of bottom nav (which is at 24px and height 60px) */
                         right: 24px;
@@ -421,6 +423,23 @@ class ConnectButton extends HTMLElement {
         const openBookBtn = this.querySelector('.book-call-btn');
         const closeModalBtn = this.querySelector('.close-modal-btn');
         const bookForm = this.querySelector('.book-form');
+
+        // Sync hover globally
+        const syncHoverElement = (el, target) => {
+            if (!el || !target) return;
+            el.addEventListener('mouseenter', () => target.classList.add('force-visible'));
+            el.addEventListener('mouseleave', () => target.classList.remove('force-visible'));
+        };
+
+        // Note: bento-navbar might be initialized asynchronously. We check in a small timeout or just look it up.
+        setTimeout(() => {
+            const navbar = document.querySelector('bento-navbar');
+            if (navbar) {
+                // bento-navbar adds it to its own root which the CSS tracks via .force-visible
+                syncHoverElement(container, navbar);
+                syncHoverElement(navbar, container);
+            }
+        }, 100);
 
         // Toggle Popup logic
         btn.addEventListener('click', (e) => {
