@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Profile - Standalone</title>
+    <!-- Include necessary fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    
+    <!-- Encapsulated Web Components Imports -->
+    <script type="module" src="./components/Navbar.js"></script>
+    <script type="module" src="./components/ConnectButton.js"></script>
+
+    <style>
+        :root {
+            --surface: #ffffff;
+            --card: linear-gradient(135deg, #2A3276, #7E8DC5);
+            --font-heading: 'Changa', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            --color-highlight: #A6B4EE;
+            --radius-xl: 36px;
+            --radius-lg: 28px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            font-family: var(--font-body);
+            position: relative;
+            /* Base for absolute avatars */
+        }
+
+        .founder-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 80vh;
+            min-height: 600px;
+            display: grid;
+            grid-template-columns: 1fr 0.55fr;
+            gap: 24px;
+            padding: 24px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+            color: #ffffff;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card.card-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 64px;
+            padding-left: 40px;
+            padding-right: 24px;
+            animation: pageLoadSlideIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+            animation-delay: 0.1s;
+        }
+
+        .card-right-group {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            animation: pageLoadSlideIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+            animation-delay: 0.3s;
+        }
+
+        .card-img-container {
+            flex: 1.5;
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 1;
+            animation: simpleFadeIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+            animation-delay: 0s;
+        }
+
+        .card-details {
+            flex: 1;
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            color: #ffffff;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .slide-heading {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin: 0 0 24px 0;
+            text-transform: uppercase;
+            font-family: var(--font-heading);
+            color: #ffffff;
+        }
+
+        .slide-heading .highlight {
+            color: var(--color-highlight);
+        }
+
+        .team-scroll-container {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding-right: 16px;
+            box-sizing: border-box;
+            opacity: 1;
+            will-change: transform, opacity, filter;
+            animation: blurFadeInUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+            animation-delay: 0.1s;
+        }
+
+        .team-scroll-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .team-scroll-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .team-scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .founder-description {
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.7;
+            opacity: 0.9;
+            margin: 0 0 16px 0;
+        }
+
+        .founder-role {
+            margin: 0 0 12px 0;
+            opacity: 0.7;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            will-change: transform, opacity, filter;
+            animation: blurFadeInUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+            animation-delay: 0.2s;
+        }
+
+        .founder-name {
+            margin-top: 0;
+            font-weight: 600;
+            font-size: 14px;
+            opacity: 0.9;
+            will-change: transform, opacity, filter;
+            animation: blurFadeInUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+            animation-delay: 0.4s;
+        }
+
+        .founder-quote {
+            font-size: 14px;
+            font-style: italic;
+            line-height: 1.5;
+            opacity: 0.9;
+            will-change: transform, opacity, filter;
+            animation: blurFadeInUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+            animation-delay: 0.3s;
+        }
+
+        #rightSocials {
+            opacity: 1;
+            will-change: transform, opacity, filter;
+            animation: blurFadeInUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+            animation-delay: 0.5s;
+        }
+
+        .dynamic-avatars {
+            position: absolute;
+            top: 60px;
+            left: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 20;
+            animation: pageLoadSlideIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+            animation-delay: 0s;
+        }
+
+        .team-avatar-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 2px solid var(--surface);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+            object-fit: cover;
+            opacity: 0.4;
+        }
+
+        .team-avatar-btn.active {
+            border-color: #fff;
+            transform: scale(1.1);
+            z-index: 50 !important;
+            opacity: 1;
+        }
+
+        .team-avatar-btn:not(:first-child) {
+            margin-top: -16px;
+        }
+
+        .water-drop-indicator {
+            position: absolute;
+            left: -16px;
+            right: auto;
+            width: 10px;
+            height: 10px;
+            background-color: var(--surface);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-135deg);
+            transition: top 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            /* top: 23px; */
+        }
+
+        .fade-out {
+            animation: blurFadeOutUp 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) both !important;
+            animation-delay: 0s !important;
+        }
+
+        .fade-out-img {
+            animation: simpleFadeOut 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) both !important;
+            animation-delay: 0s !important;
+        }
+
+        @keyframes blurFadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+                filter: blur(12px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes blurFadeOutUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-30px);
+                filter: blur(12px);
+            }
+        }
+
+        @keyframes simpleFadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes simpleFadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Team page specific override */
+        connect-button .floating-action-btn {
+            color: #ffffff !important;
+        }
+
+        @keyframes pageLoadSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pageLoadSlideOut {
+            0% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+        }
+
+        /* Utility class to trigger the out animations before navigating away */
+        .page-exit .card.card-left {
+            animation: pageLoadSlideOut 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+            animation-delay: 0s;
+        }
+
+        .page-exit .card-right-group {
+            animation: pageLoadSlideOut 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+            animation-delay: 0.1s;
+        }
+
+        .page-exit .dynamic-avatars {
+            animation: pageLoadSlideOut 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+            animation-delay: 0.2s;
+        }
+
+        @media (max-width: 900px) {
+            .founder-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .card.card-left {
+                margin-left: 0;
+                min-height: 500px;
+                padding-left: 24px;
+                padding-top: 100px;
+            }
+
+            .card-right-group {
+                display: flex;
+                flex-direction: column-reverse;
+                gap: 24px;
+            }
+
+            .card-img-container {
+                min-height: 350px;
+                flex: none;
+                width: 100%;
+            }
+
+            .dynamic-avatars {
+                flex-direction: row;
+                top: 30px;
+                left: 30px;
+            }
+
+            .team-avatar-btn:not(:first-child) {
+                margin-top: 0;
+                margin-left: -16px;
+            }
+
+            .water-drop-indicator {
+                top: auto !important;
+                bottom: -16px !important;
+                left: auto;
+                right: auto;
+                transform: rotate(135deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Modular Nav injected cleanly into the top level -->
+    <bento-navbar></bento-navbar>
+
+    <!-- Avatars inserted dynamically via JS (Rendered ABSOLUTE to founder-container so it won't break grid) -->
+    <div class="founder-container">
+        <!-- ABSOLUTE CONTAINER -->
+        <div id="avatarContainer"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></div>
+
+        <!-- Left Section (Text) -->
+        <div class="card card-left">
+            <div class="team-scroll-container" id="leftTextContent">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+
+        <!-- Right Section (Image & Details) -->
+        <div class="card-right-group">
+            <div class="card-img-container">
+                <img id="rightImage" src="" alt="Team Member">
+            </div>
+            <div class="card-details">
+                <p class="founder-role" id="rightRole"></p>
+                <div class="founder-quote" id="rightQuote"></div>
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 16px;">
+                    <div id="rightSocials" style="display: flex; gap: 12px;"></div>
+                    <div class="founder-name" id="rightName"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load data module -->
+    <script src="teamData.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const avatarContainer = document.getElementById('avatarContainer');
+            const leftTextContent = document.getElementById('leftTextContent');
+            const rightImage = document.getElementById('rightImage');
+            const rightRole = document.getElementById('rightRole');
+            const rightQuote = document.getElementById('rightQuote');
+            const rightName = document.getElementById('rightName');
+            const rightSocials = document.getElementById('rightSocials');
+
+            // Build dynamic avatars
+            const avatarsWrap = document.createElement('div');
+            avatarsWrap.className = 'dynamic-avatars';
+            avatarsWrap.style.pointerEvents = 'auto'; // Re-enable pointer events for the clickable avatars
+
+            let avatarsHTML = '';
+            teamMembers.forEach((m, idx) => {
+                let zIndex = 10 - idx;
+                avatarsHTML += `<img src="${m.avatar}" data-id="${m.id}" class="team-avatar-btn ${idx === 0 ? 'active' : ''}" style="z-index: ${zIndex};" alt="${m.name}">`;
+            });
+            avatarsHTML += `<div class="water-drop-indicator" id="waterDrop"></div>`;
+            avatarsWrap.innerHTML = avatarsHTML;
+            avatarContainer.appendChild(avatarsWrap);
+
+            // Function to update content
+            function updateContent(memberId) {
+                const member = teamMembers.find(m => m.id === memberId) || teamMembers[0];
+
+                // Fade out
+                leftTextContent.classList.add('fade-out');
+                rightImage.classList.add('fade-out-img');
+                rightQuote.classList.add('fade-out');
+                rightRole.classList.add('fade-out');
+                rightName.classList.add('fade-out');
+                rightSocials.classList.add('fade-out');
+
+                setTimeout(() => {
+                    // Update Left Text
+                    leftTextContent.innerHTML = `
+                        <h2 class="slide-heading">Know The <span class="highlight">Team</span></h2>
+                        <p class="founder-description">${member.bio}</p>
+                    `;
+
+                    // Update Right Side
+                    rightImage.src = member.img;
+                    rightRole.textContent = member.role;
+                    rightQuote.innerHTML = `<p>${member.quote}</p>`;
+                    rightName.textContent = `- ${member.name}`;
+
+                    let socialHTML = '';
+                    if (member.ig) {
+                        socialHTML += `<a href="${member.ig}" target="_blank" style="color: white; opacity: 0.8; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm3.98-10.169a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/></svg></a>`;
+                    }
+                    if (member.in) {
+                        socialHTML += `<a href="${member.in.startsWith('http') ? member.in : 'https://' + member.in}" target="_blank" style="color: white; opacity: 0.8; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>`;
+                    }
+                    rightSocials.innerHTML = socialHTML;
+
+                    // Force browser engine repaint to prevent transition clipping
+                    void leftTextContent.offsetHeight;
+                    void rightImage.offsetHeight;
+                    void rightRole.offsetHeight;
+                    void rightQuote.offsetHeight;
+                    void rightName.offsetHeight;
+                    void rightSocials.offsetHeight;
+
+                    // Fade back in
+                    leftTextContent.classList.remove('fade-out');
+                    rightImage.classList.remove('fade-out-img');
+                    rightQuote.classList.remove('fade-out');
+                    rightRole.classList.remove('fade-out');
+                    rightName.classList.remove('fade-out');
+                    rightSocials.classList.remove('fade-out');
+                }, 400);
+
+                // Update active avatar states
+                document.querySelectorAll('.team-avatar-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                const activeBtn = document.querySelector(`.team-avatar-btn[data-id="${memberId}"]`);
+                if (activeBtn) {
+                    activeBtn.classList.add('active');
+                    // Move indicator
+                    const indicator = document.getElementById('waterDrop');
+                    if (indicator && window.innerWidth > 900) {
+                        indicator.style.top = (activeBtn.offsetTop + (activeBtn.offsetHeight / 2) - 5) + 'px';
+                        indicator.style.left = '-16px';
+                        indicator.style.bottom = 'auto';
+                    } else if (indicator) {
+                        indicator.style.top = 'auto';
+                        indicator.style.bottom = '-16px';
+                        indicator.style.left = (activeBtn.offsetLeft + (activeBtn.offsetWidth / 2) - 5) + 'px';
+                    }
+                }
+            }
+
+            // Bind click events on the avatar wrap
+            avatarsWrap.addEventListener('click', (e) => {
+                if (e.target.classList.contains('team-avatar-btn')) {
+                    updateContent(e.target.getAttribute('data-id'));
+                }
+            });
+
+            // Initialize first member
+            updateContent(teamMembers[0].id);
+        });
+    </script>
+
+    <!-- Modular Connect Us Button -->
+    <connect-button></connect-button>
+</body>
+
+</html>

@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
       // Helper to get all animatable items robustly across all pages
       const getItems = () => {
-        const selector = 'bento-panel-1, bento-panel-2, bento-panel-3, bento-panel-4, bento-panel-5, bento-panel-6, bento-panel-7, bento-panel-8, bento-panel-9, .careers-container, .founder-wrapper, .scale-wrapper, .card, .card-right-group > *, .gallery-grid > *, .service-details-page .page-title, .service-details-page .content-container > *, .service-details-page > *:not(bento-navbar):not(connect-button):not(.page-title):not(.content-container):not(#bg-transition-overlay):not(.service-nav-arrows)';
+        const selector = 'bento-panel-1, bento-panel-2, bento-panel-3, bento-panel-4, bento-panel-5, bento-panel-6, bento-panel-7, bento-panel-9, .careers-container, .founder-wrapper, .scale-wrapper, .card, .card-right-group > *, .gallery-grid > *, .service-details-page .page-title, .service-details-page .content-container > *, .service-details-page > *:not(bento-navbar):not(connect-button):not(.page-title):not(.content-container):not(#bg-transition-overlay):not(.service-nav-arrows)';
         return Array.from(document.querySelectorAll(selector));
       };
       
@@ -189,6 +189,69 @@ document.addEventListener("DOMContentLoaded", () => {
               }, 3000);
           }
       }
+
+      // --- Idle UI Controller (Navbar & Connect Button fading) ---
+      const injectIdleCSS = () => {
+          if (document.getElementById('idle-ui-styles')) return;
+          const style = document.createElement('style');
+          style.id = 'idle-ui-styles';
+          style.innerHTML = `
+              .idle-ui-hidden bento-navbar,
+              .idle-ui-hidden connect-button {
+                  opacity: 0 !important;
+                  pointer-events: none !important;
+                  transition: opacity 0.8s ease-in-out !important;
+              }
+              bento-navbar, connect-button {
+                  transition: opacity 0.4s ease-in-out;
+              }
+          `;
+          document.head.appendChild(style);
+      };
+      injectIdleCSS();
+
+      let idleTimer;
+      let isMouseInZone = false;
+
+      const wakeUI = () => {
+          document.body.classList.remove('idle-ui-hidden');
+          clearTimeout(idleTimer);
+          idleTimer = setTimeout(() => {
+              const connectPopup = document.querySelector('.connect-popup.active');
+              const bookModal = document.querySelector('.book-call-modal.active');
+              if (!isMouseInZone && !connectPopup && !bookModal) {
+                  document.body.classList.add('idle-ui-hidden');
+              } else if (connectPopup || bookModal || isMouseInZone) {
+                  // Keep checking if popups/modals are active instead of permanently hiding
+                  wakeUI();
+              }
+          }, 3000);
+      };
+
+      // Initial start
+      wakeUI();
+
+      // Detection Zones for "hovering" the hidden elements smoothly without pointer-events blocking
+      document.addEventListener('mousemove', (e) => {
+          // Top 120px for Navbar, Bottom 200px / Right side 300px for Connect Button
+          const nearTop = e.clientY < 120;
+          const nearBottomRight = window.innerWidth > 768 
+              ? (e.clientY > window.innerHeight - 250 && e.clientX > window.innerWidth - 300) 
+              : (e.clientY > window.innerHeight - 250);
+              
+          if (nearTop || nearBottomRight) {
+              isMouseInZone = true;
+              wakeUI();
+          } else {
+              isMouseInZone = false;
+          }
+      });
+      
+      // Global activity interactions wake up the UI universally
+      document.addEventListener('click', wakeUI);
+      document.addEventListener('scroll', wakeUI);
+      document.addEventListener('touchstart', wakeUI);
+      // ------------------------------------------------------------
     }
 });
 

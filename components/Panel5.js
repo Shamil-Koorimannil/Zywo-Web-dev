@@ -5,7 +5,7 @@ class BentoPanel5 extends HTMLElement {
       <div class="p5-animation-wrapper" style="cursor: pointer; overflow: hidden; height: 100%; display: flex; flex-direction: column;">
         <div class="p5-top">
           <div class="p5-title-group">
-            <img class="p5-service-logo" src="assets/icons/Branding.svg" alt="Branding">
+            <img class="p5-service-logo" src="assets/logo/Zywo Design Studio.svg" alt="Branding">
             <h3 class="p5-service-name">Branding</h3>
           </div>
           <div class="p5-dot"></div>
@@ -17,10 +17,10 @@ class BentoPanel5 extends HTMLElement {
     `;
 
     const services = [
-      { name: 'Branding', file: 'branding.html', icon: 'assets/icons/Branding.svg', desc: 'Transforming bold ideas into lasting visual identities that connect with people.' },
-      { name: 'Visual Identity', file: 'visual-identity.html', icon: 'assets/icons/Visual identity.svg', desc: 'Designing cohesive visual systems for your brand making it truly unforgettable.' },
-      { name: 'Video Prod.', file: 'video-production.html', icon: 'assets/logo/Zywo Production.svg', desc: 'Filming to Final Cut: Crafting high-impact video experiences from the ground up.' },
-      { name: 'Web Dev.', file: 'web-development.html', icon: 'assets/logo/Zywo Labs.svg', desc: 'Engineering robust, seamless digital platforms backed by cutting-edge architecture.' }
+      { name: 'Branding', file: 'branding.html', icon: 'assets/logo/Zywo Design Studio.svg', desc: 'Transforming bold ideas into lasting visual identities that connect with people.' },
+      { name: 'Visual Identity', file: 'visual-identity.html', icon: 'assets/logo/Zywo Design Studio.svg', desc: 'Designing cohesive visual systems for your brand making it truly unforgettable.' },
+      { name: 'Video Production', file: 'video-production.html', icon: 'assets/logo/Zywo Production.svg', desc: 'Filming to Final Cut: Crafting high-impact video experiences from the ground up.' },
+      { name: 'Web Development', file: 'web-development.html', icon: 'assets/logo/Zywo Labs.svg', desc: 'Engineering robust, seamless digital platforms backed by cutting-edge architecture.' }
     ];
 
     let currentIndex = 0;

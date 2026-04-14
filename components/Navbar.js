@@ -3,9 +3,11 @@ class BentoNavbar extends HTMLElement {
     // Preserve exact CSS footprint globally
     this.className = "navbar";
     
-    // Dynamically calculate link prefix based on current pathname depth
-    // Works seamlessly for root-level pages and pages inside the /services/ directory
-    const prefix = window.location.pathname.includes('/services/') || window.location.href.includes('/services/') ? '../' : '';
+    const isSubdir = window.location.pathname.toLowerCase().includes('/services/') || 
+                     window.location.href.toLowerCase().includes('/services/') ||
+                     window.location.pathname.toLowerCase().includes('/campaign/') || 
+                     window.location.href.toLowerCase().includes('/campaign/');
+    const prefix = isSubdir ? '../' : '';
 
     // Inject HTML payload with water drop indicator
     this.innerHTML = `

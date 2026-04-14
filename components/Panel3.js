@@ -16,11 +16,11 @@ class BentoPanel3 extends HTMLElement {
         }
       </style>
       <a href="founder-page-standalone.html" class="p3-img-anchor">
-          <div class="p3-img" title="View Founder Profile"></div>
+          <div class="p3-img" title="View Founder Profile" style="background-image: url('./assets/images/Rayan hany a.jpg'); background-size: cover; background-position: center;"></div>
       </a>
       <div class="p3-text">Team</div>
       <a href="team-page-standalone.html" class="p3-img-anchor">
-          <div class="p3-img" title="View Team Profile"></div>
+          <div class="p3-img" title="View Team Profile" style="background-image: url('./assets/images/group photo.jpg'); background-size: cover; background-position: center;"></div>
       </a>
     `;
   }
